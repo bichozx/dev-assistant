@@ -1,0 +1,1550 @@
+[
+  {
+    "id": "api-reference.md-0",
+    "content": "# TaskFlow API Reference",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "(Introduccion)",
+      "position": 0,
+      "charCount": 24
+    },
+    "embeddingsPreview": [
+      -0.021026611328125,
+      0.0250396728515625,
+      -0.0009474754333496094,
+      -0.0288848876953125,
+      0.0355224609375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-1",
+    "content": "# TaskFlow API Reference\n\n## Base URL\n\n```\nhttps://api.taskflow.app/v1\n```\n\nPara desarrollo local:\n\n```\nhttp://localhost:3000/v1\n```",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Base URL",
+      "position": 1,
+      "charCount": 132
+    },
+    "embeddingsPreview": [
+      -0.0083465576171875,
+      0.00897216796875,
+      0.058624267578125,
+      -0.02618408203125,
+      0.03997802734375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-2",
+    "content": "```\nhttp://localhost:3000/v1\n```\n\n## Autenticación\n\nTaskFlow usa **Bearer tokens (JWT)** para autenticar todas las requests a endpoints protegidos.",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Autenticación",
+      "position": 2,
+      "charCount": 147
+    },
+    "embeddingsPreview": [
+      -0.01007843017578125,
+      -0.0029296875,
+      0.05859375,
+      -0.0134124755859375,
+      0.031951904296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-3",
+    "content": "TaskFlow usa **Bearer tokens (JWT)** para autenticar todas las requests a endpoints protegidos.\n\n### Obtener un token\n\n```http\nPOST /v1/auth/login\nContent-Type: application/json\n\n{\n  \"email\": \"usuario...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Obtener un token",
+      "position": 3,
+      "charCount": 462
+    },
+    "embeddingsPreview": [
+      0.0047607421875,
+      0.017852783203125,
+      0.034423828125,
+      -0.0019426345825195312,
+      0.013916015625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-4",
+    "content": "```json\n{\n  \"accessToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"expiresIn\": 900,\n  \"tokenType\": \"Bearer\"\n}\n```\n\n### Usar el token\n...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Usar el token",
+      "position": 4,
+      "charCount": 338
+    },
+    "embeddingsPreview": [
+      -0.0255889892578125,
+      -0.0083465576171875,
+      0.00849151611328125,
+      -0.020172119140625,
+      0.05706787109375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-5",
+    "content": "```http\nAuthorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\n```\n\n### Renovar el token\n\nEl access token expira en 15 minutos. Usa el refresh token para obtener uno nuevo:\n\n```http\nPOST /v1/au...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Renovar el token",
+      "position": 5,
+      "charCount": 310
+    },
+    "embeddingsPreview": [
+      -0.04473876953125,
+      0.031524658203125,
+      0.016021728515625,
+      -0.0135345458984375,
+      0.0096435546875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-6",
+    "content": "{\n  \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}\n```\n\n### Registro de usuario\n\n```http\nPOST /v1/auth/register\nContent-Type: application/json\n\n{\n  \"name\": \"María García\",\n  \"email\": \"mar...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Registro de usuario",
+      "position": 6,
+      "charCount": 571
+    },
+    "embeddingsPreview": [
+      -0.033294677734375,
+      0.01187896728515625,
+      -0.015380859375,
+      0.00533294677734375,
+      0.0418701171875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-7",
+    "content": "---\n\n## Tareas",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Tareas",
+      "position": 7,
+      "charCount": 14
+    },
+    "embeddingsPreview": [
+      -0.005260467529296875,
+      0.040802001953125,
+      0.04736328125,
+      -0.0296173095703125,
+      -0.0305938720703125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-8",
+    "content": "## Tareas\n\n### Modelo de Tarea\n\n```typescript\ninterface Task {\n  id: string;              // \"tsk_01HXYZ123\"\n  title: string;           // Máximo 255 caracteres\n  description?: string;    // Máximo 10...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Modelo de Tarea",
+      "position": 8,
+      "charCount": 661
+    },
+    "embeddingsPreview": [
+      -0.02294921875,
+      0.02862548828125,
+      0.0005135536193847656,
+      0.00650787353515625,
+      0.01403045654296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-9",
+    "content": "```typescript\ninterface Task {\n  id: string;              // \"tsk_01HXYZ123\"\n  title: string;           // Máximo 255 caracteres\n  description?: string;    // Máximo 10,000 caracteres (Markdown)\n  sta...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### GET /tasks — Listar tareas",
+      "position": 9,
+      "charCount": 2005
+    },
+    "embeddingsPreview": [
+      -0.0513916015625,
+      0.030029296875,
+      -0.0032958984375,
+      -0.01194000244140625,
+      0.01303863525390625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-10",
+    "content": "```json\n{\n  \"data\": [\n    {\n      \"id\": \"tsk_01HXYZ123\",\n      \"title\": \"Implementar autenticación JWT\",\n      \"status\": \"in_progress\",\n      \"priority\": \"high\",\n      \"dueDate\": \"2024-02-01T17:00:00Z...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### POST /tasks — Crear tarea",
+      "position": 10,
+      "charCount": 1307
+    },
+    "embeddingsPreview": [
+      -0.036773681640625,
+      0.0273590087890625,
+      -0.004505157470703125,
+      -0.0236663818359375,
+      0.010040283203125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-11",
+    "content": "```json\n{\n  \"data\": {\n    \"id\": \"tsk_01HNEW789\",\n    \"title\": \"Revisar PR de autenticación\",\n    \"status\": \"todo\",\n    \"priority\": \"high\",\n    \"projectId\": \"prj_01HXYZ999\",\n    \"assigneeId\": \"usr_01HA...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### GET /tasks/:id — Obtener tarea",
+      "position": 11,
+      "charCount": 627
+    },
+    "embeddingsPreview": [
+      -0.0193634033203125,
+      0.044464111328125,
+      -0.0023441314697265625,
+      -0.012115478515625,
+      0.0256805419921875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-12",
+    "content": "**Errores:**\n- `404` — Tarea no encontrada o sin permisos para verla\n\n### PUT /tasks/:id — Actualizar tarea\n\nActualización parcial (solo los campos enviados se actualizan):\n\n```http\nPUT /v1/tasks/tsk_...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### PUT /tasks/:id — Actualizar tarea",
+      "position": 12,
+      "charCount": 461
+    },
+    "embeddingsPreview": [
+      0.00945281982421875,
+      0.03729248046875,
+      0.034881591796875,
+      -0.0034618377685546875,
+      0.0289764404296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-13",
+    "content": "**Errores:**\n- `404` — Tarea no encontrada\n- `403` — Sin permisos para editar esta tarea\n\n### DELETE /tasks/:id — Eliminar tarea\n\n```http\nDELETE /v1/tasks/tsk_01HXYZ123\nAuthorization: Bearer {token}\n`...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### DELETE /tasks/:id — Eliminar tarea",
+      "position": 13,
+      "charCount": 330
+    },
+    "embeddingsPreview": [
+      0.04986572265625,
+      0.04498291015625,
+      0.0543212890625,
+      -0.0200347900390625,
+      0.0273590087890625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-14",
+    "content": "---\n\n## Proyectos",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Proyectos",
+      "position": 14,
+      "charCount": 17
+    },
+    "embeddingsPreview": [
+      -0.0099334716796875,
+      -0.0023784637451171875,
+      0.07403564453125,
+      -0.00624847412109375,
+      -0.0196990966796875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-15",
+    "content": "## Proyectos\n\n### Modelo de Proyecto\n\n```typescript\ninterface Project {\n  id: string;              // \"prj_01HXYZ999\"\n  name: string;\n  description?: string;\n  ownerId: string;         // Usuario prop...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Modelo de Proyecto",
+      "position": 15,
+      "charCount": 420
+    },
+    "embeddingsPreview": [
+      -0.051605224609375,
+      -0.017608642578125,
+      0.0267486572265625,
+      0.002471923828125,
+      0.020294189453125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-16",
+    "content": "interface ProjectMember {\n  userId: string;\n  role: \"owner\" | \"admin\" | \"member\" | \"viewer\";\n  joinedAt: string;\n}\n```\n\n### GET /projects — Listar proyectos\n\n```http\nGET /v1/projects?limit=10\nAuthoriz...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### GET /projects — Listar proyectos",
+      "position": 16,
+      "charCount": 573
+    },
+    "embeddingsPreview": [
+      -0.01461029052734375,
+      -0.00012350082397460938,
+      0.051605224609375,
+      0.0132293701171875,
+      0.0218353271484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-17",
+    "content": "```json\n{\n  \"data\": [\n    {\n      \"id\": \"prj_01HXYZ999\",\n      \"name\": \"TaskFlow Backend\",\n      \"description\": \"API REST principal\",\n      \"ownerId\": \"usr_01HOWNER\",\n      \"taskCount\": 23,\n      \"cre...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### POST /projects — Crear proyecto",
+      "position": 17,
+      "charCount": 581
+    },
+    "embeddingsPreview": [
+      -0.022064208984375,
+      0.005584716796875,
+      0.0136871337890625,
+      -0.0212249755859375,
+      0.042327880859375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-18",
+    "content": "---\n\n## Usuarios",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Usuarios",
+      "position": 18,
+      "charCount": 16
+    },
+    "embeddingsPreview": [
+      -0.0016126632690429688,
+      0.04412841796875,
+      0.0269317626953125,
+      -0.00257110595703125,
+      0.0156402587890625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-19",
+    "content": "## Usuarios\n\n### GET /users/me — Perfil del usuario actual\n\n```http\nGET /v1/users/me\nAuthorization: Bearer {token}\n```\n\n**Respuesta (200):**\n\n```json\n{\n  \"data\": {\n    \"id\": \"usr_01HXYZ123\",\n    \"name...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### GET /users/me — Perfil del usuario actual",
+      "position": 19,
+      "charCount": 389
+    },
+    "embeddingsPreview": [
+      -0.007415771484375,
+      0.026397705078125,
+      0.01383209228515625,
+      0.01090240478515625,
+      0.015228271484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-20",
+    "content": "```json\n{\n  \"data\": {\n    \"id\": \"usr_01HXYZ123\",\n    \"name\": \"María García\",\n    \"email\": \"maria@ejemplo.com\",\n    \"avatar\": \"https://cdn.taskflow.app/avatars/usr_01HXYZ123.jpg\",\n    \"plan\": \"pro\",\n  ...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### PUT /users/me — Actualizar perfil",
+      "position": 20,
+      "charCount": 418
+    },
+    "embeddingsPreview": [
+      0.021728515625,
+      0.0103607177734375,
+      -0.024139404296875,
+      -0.002033233642578125,
+      0.00897216796875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-21",
+    "content": "---\n\n## Rate Limiting\n\nCada usuario autenticado puede hacer **100 requests por minuto**.\n\nLos headers de rate limiting están presentes en todas las respuestas:\n\n```http\nX-RateLimit-Limit: 100\nX-RateLi...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Rate Limiting",
+      "position": 21,
+      "charCount": 495
+    },
+    "embeddingsPreview": [
+      0.00286865234375,
+      0.01316070556640625,
+      0.0628662109375,
+      -0.00839996337890625,
+      -0.008087158203125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-22",
+    "content": "---\n\n## Paginación\n\nTaskFlow usa **paginación cursor-based** para manejar eficientemente colecciones grandes.",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Paginación",
+      "position": 22,
+      "charCount": 109
+    },
+    "embeddingsPreview": [
+      0.039276123046875,
+      0.0411376953125,
+      0.059539794921875,
+      0.01800537109375,
+      0.0123748779296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-23",
+    "content": "TaskFlow usa **paginación cursor-based** para manejar eficientemente colecciones grandes.\n\n### Iterar todas las páginas\n\n```typescript\nlet cursor: string | undefined;\nlet allTasks: Task[] = [];\n\ndo {\n...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Iterar todas las páginas",
+      "position": 23,
+      "charCount": 539
+    },
+    "embeddingsPreview": [
+      0.0229644775390625,
+      0.033538818359375,
+      0.0239410400390625,
+      0.015167236328125,
+      -0.0000064373016357421875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-24",
+    "content": "---\n\n## Códigos de Error\n\n| Código | Descripción |\n|--------|-------------|\n| `400` | Bad Request — Datos inválidos en el body |\n| `401` | Unauthorized — Token ausente o expirado |\n| `403` | Forbidden...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "## Códigos de Error",
+      "position": 24,
+      "charCount": 503
+    },
+    "embeddingsPreview": [
+      0.01168060302734375,
+      0.031280517578125,
+      0.019287109375,
+      0.01788330078125,
+      0.0193634033203125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "api-reference.md-25",
+    "content": "| Código | Descripción |\n|--------|-------------|\n| `400` | Bad Request — Datos inválidos en el body |\n| `401` | Unauthorized — Token ausente o expirado |\n| `403` | Forbidden — Sin permisos para esta ...",
+    "metadata": {
+      "source": "api-reference.md",
+      "heading": "### Formato de error",
+      "position": 25,
+      "charCount": 708
+    },
+    "embeddingsPreview": [
+      0.0167388916015625,
+      0.03875732421875,
+      0.007129669189453125,
+      0.0142974853515625,
+      0.00514984130859375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-0",
+    "content": "# Getting Started con TaskFlow API\n\nEste guía te lleva desde cero hasta hacer tu primera request en menos de 5 minutos.",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 0,
+      "charCount": 119
+    },
+    "embeddingsPreview": [
+      -0.00438690185546875,
+      -0.00489044189453125,
+      0.01739501953125,
+      -0.01213836669921875,
+      0.036376953125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-1",
+    "content": "Este guía te lleva desde cero hasta hacer tu primera request en menos de 5 minutos.\n\n## Quick Start — 5 minutos",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "## Quick Start — 5 minutos",
+      "position": 1,
+      "charCount": 111
+    },
+    "embeddingsPreview": [
+      -0.04974365234375,
+      -0.018524169921875,
+      -0.005970001220703125,
+      -0.01155853271484375,
+      -0.01007080078125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-2",
+    "content": "## Quick Start — 5 minutos\n\n### Paso 1: Obtener tus credenciales\n\n1. Crea una cuenta en [taskflow.app/signup](https://taskflow.app/signup)\n2. Ve a **Settings → API Keys**\n3. Haz click en **\"Crear nuev...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Paso 1: Obtener tus credenciales",
+      "position": 2,
+      "charCount": 276
+    },
+    "embeddingsPreview": [
+      0.0137939453125,
+      0.0169830322265625,
+      -0.0019407272338867188,
+      -0.019805908203125,
+      0.0159759521484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-3",
+    "content": "1. Crea una cuenta en [taskflow.app/signup](https://taskflow.app/signup)\n2. Ve a **Settings → API Keys**\n3. Haz click en **\"Crear nueva API Key\"**\n4. Guarda el token en un lugar seguro — no se mostrar...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Paso 2: Hacer tu primera request",
+      "position": 3,
+      "charCount": 257
+    },
+    "embeddingsPreview": [
+      0.02935791015625,
+      -0.029693603515625,
+      0.0170135498046875,
+      -0.0229644775390625,
+      0.04400634765625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-4",
+    "content": "```bash\n\n# Verifica que la API está respondiendo\ncurl https://api.taskflow.app/v1/health",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 4,
+      "charCount": 88
+    },
+    "embeddingsPreview": [
+      -0.027862548828125,
+      0.00037360191345214844,
+      0.0196533203125,
+      -0.0255279541015625,
+      0.0428466796875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-5",
+    "content": "# Verifica que la API está respondiendo\ncurl https://api.taskflow.app/v1/health\n\n# Respuesta esperada:",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 5,
+      "charCount": 102
+    },
+    "embeddingsPreview": [
+      -0.03350830078125,
+      0.03094482421875,
+      0.006195068359375,
+      -0.024200439453125,
+      0.03839111328125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-6",
+    "content": "# Respuesta esperada:\n\n# {\"status\": \"ok\", \"version\": \"1.4.2\"}\n```",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 6,
+      "charCount": 65
+    },
+    "embeddingsPreview": [
+      -0.007373809814453125,
+      -0.0250244140625,
+      0.0311126708984375,
+      -0.020050048828125,
+      -0.011993408203125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-7",
+    "content": "# {\"status\": \"ok\", \"version\": \"1.4.2\"}\n```\n\n### Paso 3: Autenticarte\n\n```bash\ncurl -X POST https://api.taskflow.app/v1/auth/login \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"email\": \"tu@ema...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Paso 3: Autenticarte",
+      "position": 7,
+      "charCount": 368
+    },
+    "embeddingsPreview": [
+      -0.0037136077880859375,
+      -0.014739990234375,
+      -0.01214599609375,
+      -0.026214599609375,
+      0.04083251953125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-8",
+    "content": "```bash\nexport TASKFLOW_TOKEN=\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...\"\n```\n\n### Paso 4: Crear tu primera tarea\n\n```bash\ncurl -X POST https://api.taskflow.app/v1/tasks \\\n  -H \"Authorization: Bearer $T...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Paso 4: Crear tu primera tarea",
+      "position": 8,
+      "charCount": 436
+    },
+    "embeddingsPreview": [
+      0.00685882568359375,
+      -0.0193023681640625,
+      -0.0116424560546875,
+      -0.02972412109375,
+      0.0179901123046875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-9",
+    "content": "---\n\n## Autenticación con JWT\n\nTaskFlow usa JWT (JSON Web Tokens) con algoritmo RS256.",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "## Autenticación con JWT",
+      "position": 9,
+      "charCount": 86
+    },
+    "embeddingsPreview": [
+      -0.0052337646484375,
+      -0.005054473876953125,
+      0.026885986328125,
+      -0.0250244140625,
+      0.046905517578125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-10",
+    "content": "TaskFlow usa JWT (JSON Web Tokens) con algoritmo RS256.\n\n### Flujo de autenticación\n\n```\nUsuario → POST /auth/login → [accessToken (15min) + refreshToken (7 días)]\n     ↓\nUsar accessToken en headers d...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Flujo de autenticación",
+      "position": 10,
+      "charCount": 297
+    },
+    "embeddingsPreview": [
+      -0.01000213623046875,
+      0.02032470703125,
+      0.0168609619140625,
+      -0.008544921875,
+      0.022979736328125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-11",
+    "content": "```\nUsuario → POST /auth/login → [accessToken (15min) + refreshToken (7 días)]\n     ↓\nUsar accessToken en headers de cada request\n     ↓\nCuando expire → POST /auth/refresh con refreshToken → nuevo acc...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Implementación en JavaScript",
+      "position": 11,
+      "charCount": 1720
+    },
+    "embeddingsPreview": [
+      -0.06365966796875,
+      0.045684814453125,
+      0.01303863525390625,
+      -0.0045623779296875,
+      0.040618896484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-12",
+    "content": "---\n\n## Webhooks\n\nLos webhooks permiten que TaskFlow notifique a tu aplicación cuando ocurren eventos importantes.",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "## Webhooks",
+      "position": 12,
+      "charCount": 114
+    },
+    "embeddingsPreview": [
+      -0.01273345947265625,
+      0.018402099609375,
+      -0.004703521728515625,
+      0.0025196075439453125,
+      0.0112152099609375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-13",
+    "content": "Los webhooks permiten que TaskFlow notifique a tu aplicación cuando ocurren eventos importantes.\n\n### Eventos disponibles\n\n| Evento | Descripción |\n|--------|-------------|\n| `task.created` | Se creó ...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Eventos disponibles",
+      "position": 13,
+      "charCount": 419
+    },
+    "embeddingsPreview": [
+      -0.0200042724609375,
+      0.0207977294921875,
+      -0.0006504058837890625,
+      -0.0021514892578125,
+      0.00959014892578125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-14",
+    "content": "| Evento | Descripción |\n|--------|-------------|\n| `task.created` | Se creó una nueva tarea |\n| `task.updated` | Se actualizó una tarea |\n| `task.completed` | Una tarea pasó a estado `done` |\n| `task...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Configurar un webhook",
+      "position": 14,
+      "charCount": 557
+    },
+    "embeddingsPreview": [
+      -0.00881195068359375,
+      0.039794921875,
+      -0.0024662017822265625,
+      -0.0188751220703125,
+      0.01080322265625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-15",
+    "content": "{\n  \"url\": \"https://mi-app.com/webhooks/taskflow\",\n  \"events\": [\"task.created\", \"task.completed\"],\n  \"secret\": \"mi-secreto-para-verificar\"\n}\n```\n\n### Verificar la firma del webhook\n\nCada request de we...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Verificar la firma del webhook",
+      "position": 15,
+      "charCount": 1130
+    },
+    "embeddingsPreview": [
+      -0.009002685546875,
+      0.0249786376953125,
+      -0.0177459716796875,
+      -0.0208892822265625,
+      0.015625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-16",
+    "content": "---\n\n## SDKs oficiales",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "## SDKs oficiales",
+      "position": 16,
+      "charCount": 22
+    },
+    "embeddingsPreview": [
+      0.0258331298828125,
+      0.036712646484375,
+      0.0287628173828125,
+      -0.01214599609375,
+      -0.0017242431640625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-17",
+    "content": "## SDKs oficiales\n\n### JavaScript / TypeScript\n\n```bash\nnpm install @taskflow/sdk\n```\n\n```typescript\nimport { TaskFlowClient } from \"@taskflow/sdk\";\n\nconst client = new TaskFlowClient({\n  apiKey: proc...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### JavaScript / TypeScript",
+      "position": 17,
+      "charCount": 526
+    },
+    "embeddingsPreview": [
+      0.0002913475036621094,
+      0.036102294921875,
+      0.01678466796875,
+      -0.026153564453125,
+      0.0382080078125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-18",
+    "content": "// Actualizar una tarea\nawait client.tasks.update(task.id, {\n  status: \"done\",\n});\n```\n\n### Python\n\n```bash\npip install taskflow-python\n```\n\n```python\nfrom taskflow import TaskFlowClient\n\nclient = Tas...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### Python",
+      "position": 18,
+      "charCount": 251
+    },
+    "embeddingsPreview": [
+      0.0026187896728515625,
+      0.00856781005859375,
+      -0.01543426513671875,
+      0.00250244140625,
+      0.013702392578125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-19",
+    "content": "client = TaskFlowClient(api_key=os.environ[\"TASKFLOW_API_KEY\"])\n\n# Crear una tarea\ntask = client.tasks.create(\n    title=\"Mi tarea\",\n    priority=\"high\"\n)",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 19,
+      "charCount": 154
+    },
+    "embeddingsPreview": [
+      0.03857421875,
+      0.00836181640625,
+      0.02191162109375,
+      -0.003143310546875,
+      0.0236358642578125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-20",
+    "content": "# Crear una tarea\ntask = client.tasks.create(\n    title=\"Mi tarea\",\n    priority=\"high\"\n)\n\n# Listar tareas\ntasks = client.tasks.list(status=\"todo\", limit=20)\n```\n\n---",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 20,
+      "charCount": 166
+    },
+    "embeddingsPreview": [
+      0.0150146484375,
+      -0.00200653076171875,
+      0.0400390625,
+      0.005008697509765625,
+      -0.01189422607421875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-21",
+    "content": "---\n\n## Preguntas Frecuentes (FAQ)",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "## Preguntas Frecuentes (FAQ)",
+      "position": 21,
+      "charCount": 34
+    },
+    "embeddingsPreview": [
+      -0.0185089111328125,
+      -0.006500244140625,
+      0.0528564453125,
+      0.059295654296875,
+      -0.0187530517578125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-22",
+    "content": "## Preguntas Frecuentes (FAQ)\n\n### ¿Cómo manejo la paginación en colecciones grandes?\n\nTaskFlow usa paginación cursor-based. El campo `nextCursor` de la respuesta es el cursor para la siguiente página...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### ¿Cómo manejo la paginación en colecciones grandes?",
+      "position": 22,
+      "charCount": 669
+    },
+    "embeddingsPreview": [
+      0.004047393798828125,
+      0.0232391357421875,
+      0.07843017578125,
+      0.036041259765625,
+      0.0071868896484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-23",
+    "content": "  return allTasks;\n}\n```\n\n### ¿Qué hago si recibo un error 429?\n\nRespeta el header `Retry-After` que indica cuántos segundos esperar:\n\n```javascript\nasync function requestWithRetry(url, options, maxRe...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### ¿Qué hago si recibo un error 429?",
+      "position": 23,
+      "charCount": 690
+    },
+    "embeddingsPreview": [
+      -0.037933349609375,
+      0.0093231201171875,
+      0.016021728515625,
+      -0.0136871337890625,
+      -0.0017576217651367188
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-24",
+    "content": "    return response;\n  }\n  throw new Error(\"Máximo de reintentos alcanzado\");\n}\n```\n\n### ¿Mi token expiró, qué hago?\n\nLos access tokens duran 15 minutos. Cuando recibes un `401 Unauthorized`, usa el r...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### ¿Mi token expiró, qué hago?",
+      "position": 24,
+      "charCount": 521
+    },
+    "embeddingsPreview": [
+      -0.04119873046875,
+      0.0146331787109375,
+      0.032684326171875,
+      -0.003826141357421875,
+      0.01512908935546875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-25",
+    "content": "Los refresh tokens duran 7 días. Si también expira el refresh token, el usuario debe hacer login de nuevo.\n\n### ¿Puedo usar la API sin JavaScript o Python?\n\nSí. La API acepta cualquier cliente HTTP qu...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### ¿Puedo usar la API sin JavaScript o Python?",
+      "position": 25,
+      "charCount": 257
+    },
+    "embeddingsPreview": [
+      -0.02557373046875,
+      0.025909423828125,
+      0.00788116455078125,
+      -0.004535675048828125,
+      0.022186279296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-26",
+    "content": "```bash\n\n# Con HTTPie\nhttp POST api.taskflow.app/v1/tasks \\\n  Authorization:\"Bearer $TOKEN\" \\\n  title=\"Mi tarea\" priority=high",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 26,
+      "charCount": 126
+    },
+    "embeddingsPreview": [
+      -0.0208740234375,
+      -0.0258636474609375,
+      0.005382537841796875,
+      -0.033416748046875,
+      0.0169677734375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-27",
+    "content": "# Con HTTPie\nhttp POST api.taskflow.app/v1/tasks \\\n  Authorization:\"Bearer $TOKEN\" \\\n  title=\"Mi tarea\" priority=high\n\n# Con curl\ncurl -X POST https://api.taskflow.app/v1/tasks \\\n  -H \"Authorization: ...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "(Introduccion)",
+      "position": 27,
+      "charCount": 309
+    },
+    "embeddingsPreview": [
+      -0.0313720703125,
+      -0.021392822265625,
+      0.004505157470703125,
+      -0.041015625,
+      0.01824951171875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-28",
+    "content": "# Con curl\ncurl -X POST https://api.taskflow.app/v1/tasks \\\n  -H \"Authorization: Bearer $TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"Mi tarea\", \"priority\": \"high\"}'\n```\n\n### ¿Cóm...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### ¿Cómo agrego miembros a un proyecto?",
+      "position": 28,
+      "charCount": 457
+    },
+    "embeddingsPreview": [
+      -0.00843048095703125,
+      -0.0110321044921875,
+      0.0029163360595703125,
+      -0.01012420654296875,
+      0.00592041015625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "getting-started.md-29",
+    "content": "Roles disponibles: `admin`, `member`, `viewer`.\n\n### ¿Puedo filtrar tareas por múltiples tags?\n\nSí, pasa los tags separados por coma:\n\n```http\nGET /v1/tasks?tags=bug,frontend&status=todo\n```\n\nEsto ret...",
+    "metadata": {
+      "source": "getting-started.md",
+      "heading": "### ¿Puedo filtrar tareas por múltiples tags?",
+      "position": 29,
+      "charCount": 341
+    },
+    "embeddingsPreview": [
+      -0.00130462646484375,
+      0.019866943359375,
+      0.025634765625,
+      -0.0102081298828125,
+      -0.0255126953125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-0",
+    "content": "# TaskFlow API\n\nTaskFlow es una API REST moderna para gestión de tareas y proyectos en equipo. Diseñada para ser simple, rápida y segura, permite a los developers integrar gestión de tareas en cualqui...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 0,
+      "charCount": 214
+    },
+    "embeddingsPreview": [
+      0.01416778564453125,
+      0.0242462158203125,
+      0.0217742919921875,
+      -0.0267333984375,
+      0.050384521484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-1",
+    "content": "TaskFlow es una API REST moderna para gestión de tareas y proyectos en equipo. Diseñada para ser simple, rápida y segura, permite a los developers integrar gestión de tareas en cualquier aplicación.\n\n...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Features principales",
+      "position": 1,
+      "charCount": 739
+    },
+    "embeddingsPreview": [
+      0.0033416748046875,
+      0.040557861328125,
+      0.032135009765625,
+      -0.004459381103515625,
+      0.01904296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-2",
+    "content": "- **Gestión de tareas** — CRUD completo con prioridades, fechas límite, etiquetas y estados\n- **Proyectos** — Organiza tareas en proyectos con miembros y permisos\n- **Colaboración** — Asigna tareas, c...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Tech Stack",
+      "position": 2,
+      "charCount": 836
+    },
+    "embeddingsPreview": [
+      -0.0179443359375,
+      0.037750244140625,
+      0.038360595703125,
+      -0.01013946533203125,
+      0.036895751953125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-3",
+    "content": "- **Runtime:** Node.js 20 LTS\n- **Framework:** Express 4.x\n- **Base de datos:** PostgreSQL 15 (con extensión pg_vector para búsqueda semántica)\n- **Cache:** Redis 7\n- **Auth:** JWT (RS256) + Refresh t...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Requisitos previos",
+      "position": 3,
+      "charCount": 393
+    },
+    "embeddingsPreview": [
+      -0.0186614990234375,
+      0.01788330078125,
+      0.0391845703125,
+      -0.053680419921875,
+      0.0191497802734375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-4",
+    "content": "- Node.js >= 20.0.0\n- PostgreSQL >= 15\n- Redis >= 7\n- npm >= 10\n\n## Instalación",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Instalación",
+      "position": 4,
+      "charCount": 79
+    },
+    "embeddingsPreview": [
+      -0.008026123046875,
+      -0.00496673583984375,
+      0.052398681640625,
+      -0.03033447265625,
+      0.040771484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-5",
+    "content": "## Instalación\n\n### 1. Clonar el repositorio\n\n```bash\ngit clone https://github.com/taskflow/api.git\ncd api\n```",
+    "metadata": {
+      "source": "README.md",
+      "heading": "### 1. Clonar el repositorio",
+      "position": 5,
+      "charCount": 110
+    },
+    "embeddingsPreview": [
+      -0.004360198974609375,
+      0.0166168212890625,
+      0.034912109375,
+      -0.0303192138671875,
+      0.02923583984375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-6",
+    "content": "```bash\ngit clone https://github.com/taskflow/api.git\ncd api\n```\n\n### 2. Instalar dependencias\n\n```bash\nnpm install\n```",
+    "metadata": {
+      "source": "README.md",
+      "heading": "### 2. Instalar dependencias",
+      "position": 6,
+      "charCount": 119
+    },
+    "embeddingsPreview": [
+      0.003467559814453125,
+      0.007038116455078125,
+      0.040924072265625,
+      -0.033905029296875,
+      0.0238494873046875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-7",
+    "content": "```bash\nnpm install\n```\n\n### 3. Configurar variables de entorno\n\n```bash\ncp .env.template .env\n```\n\nEdita `.env` con tus valores (ver sección Variables de entorno más abajo).",
+    "metadata": {
+      "source": "README.md",
+      "heading": "### 3. Configurar variables de entorno",
+      "position": 7,
+      "charCount": 174
+    },
+    "embeddingsPreview": [
+      0.0177764892578125,
+      -0.0221710205078125,
+      0.060302734375,
+      -0.0098114013671875,
+      0.021942138671875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-8",
+    "content": "Edita `.env` con tus valores (ver sección Variables de entorno más abajo).\n\n### 4. Inicializar la base de datos\n\n```bash",
+    "metadata": {
+      "source": "README.md",
+      "heading": "### 4. Inicializar la base de datos",
+      "position": 8,
+      "charCount": 120
+    },
+    "embeddingsPreview": [
+      0.0161285400390625,
+      -0.01227569580078125,
+      0.09075927734375,
+      -0.005634307861328125,
+      -0.0016222000122070312
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-9",
+    "content": "```bash\n\n# Crear la base de datos\ncreatedb taskflow_dev",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 9,
+      "charCount": 55
+    },
+    "embeddingsPreview": [
+      0.00063323974609375,
+      -0.0145416259765625,
+      0.08184814453125,
+      -0.0209197998046875,
+      -0.0027561187744140625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-10",
+    "content": "# Crear la base de datos\ncreatedb taskflow_dev\n\n# Correr migraciones\nnpm run db:migrate",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 10,
+      "charCount": 87
+    },
+    "embeddingsPreview": [
+      0.0164337158203125,
+      0.02398681640625,
+      0.08258056640625,
+      -0.03802490234375,
+      -0.0009241104125976562
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-11",
+    "content": "# Correr migraciones\nnpm run db:migrate\n\n# (Opcional) Cargar datos de ejemplo\nnpm run db:seed\n```",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 11,
+      "charCount": 97
+    },
+    "embeddingsPreview": [
+      0.032196044921875,
+      0.0298919677734375,
+      0.07550048828125,
+      -0.02044677734375,
+      -0.0032329559326171875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-12",
+    "content": "# (Opcional) Cargar datos de ejemplo\nnpm run db:seed\n```\n\n### 5. Iniciar en desarrollo\n\n```bash\nnpm run dev\n```\n\nEl servidor estará disponible en `http://localhost:3000`.",
+    "metadata": {
+      "source": "README.md",
+      "heading": "### 5. Iniciar en desarrollo",
+      "position": 12,
+      "charCount": 170
+    },
+    "embeddingsPreview": [
+      0.029815673828125,
+      -0.0009560585021972656,
+      0.0614013671875,
+      0.005458831787109375,
+      0.01165771484375
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-13",
+    "content": "El servidor estará disponible en `http://localhost:3000`.\n\n## Variables de entorno\n\n```env",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Variables de entorno",
+      "position": 13,
+      "charCount": 90
+    },
+    "embeddingsPreview": [
+      -0.0227813720703125,
+      -0.0012140274047851562,
+      0.06463623046875,
+      -0.0214691162109375,
+      0.0231170654296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-14",
+    "content": "```env\n\n# Servidor\nNODE_ENV=development\nPORT=3000",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 14,
+      "charCount": 49
+    },
+    "embeddingsPreview": [
+      -0.001575469970703125,
+      -0.0210113525390625,
+      0.0712890625,
+      -0.0067901611328125,
+      0.0295562744140625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-15",
+    "content": "# Servidor\nNODE_ENV=development\nPORT=3000\n\n# Base de datos PostgreSQL\nDATABASE_URL=postgresql://user:password@localhost:5432/taskflow_dev",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 15,
+      "charCount": 137
+    },
+    "embeddingsPreview": [
+      -0.0014190673828125,
+      -0.0179290771484375,
+      0.0501708984375,
+      -0.017608642578125,
+      -0.0029239654541015625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-16",
+    "content": "# Base de datos PostgreSQL\nDATABASE_URL=postgresql://user:password@localhost:5432/taskflow_dev\n\n# Redis (cache y sesiones)\nREDIS_URL=redis://localhost:6379",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 16,
+      "charCount": 155
+    },
+    "embeddingsPreview": [
+      -0.0026187896728515625,
+      0.00911712646484375,
+      0.0682373046875,
+      -0.042816162109375,
+      0.001506805419921875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-17",
+    "content": "# Redis (cache y sesiones)\nREDIS_URL=redis://localhost:6379\n\n# JWT\nJWT_PRIVATE_KEY_PATH=./keys/private.pem\nJWT_PUBLIC_KEY_PATH=./keys/public.pem\nJWT_ACCESS_TOKEN_EXPIRY=15m\nJWT_REFRESH_TOKEN_EXPIRY=7d",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 17,
+      "charCount": 200
+    },
+    "embeddingsPreview": [
+      -0.0046844482421875,
+      -0.012176513671875,
+      0.062164306640625,
+      -0.048248291015625,
+      0.048309326171875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-18",
+    "content": "# JWT\nJWT_PRIVATE_KEY_PATH=./keys/private.pem\nJWT_PUBLIC_KEY_PATH=./keys/public.pem\nJWT_ACCESS_TOKEN_EXPIRY=15m\nJWT_REFRESH_TOKEN_EXPIRY=7d\n\n# Email (para notificaciones)\nSMTP_HOST=smtp.resend.com\nSMT...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 18,
+      "charCount": 290
+    },
+    "embeddingsPreview": [
+      0.028717041015625,
+      0.0023937225341796875,
+      0.029754638671875,
+      -0.0273284912109375,
+      0.0290679931640625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-19",
+    "content": "# Email (para notificaciones)\nSMTP_HOST=smtp.resend.com\nSMTP_PORT=587\nSMTP_USER=resend\nSMTP_PASSWORD=re_xxxxxxxxxxxxx\nFROM_EMAIL=noreply@taskflow.app\n\n# Webhooks\nWEBHOOK_SECRET=tu-secreto-aqui",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 19,
+      "charCount": 192
+    },
+    "embeddingsPreview": [
+      0.0277862548828125,
+      0.016510009765625,
+      0.01140594482421875,
+      -0.01172637939453125,
+      0.030670166015625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-20",
+    "content": "# Webhooks\nWEBHOOK_SECRET=tu-secreto-aqui\n\n# Rate limiting\nRATE_LIMIT_WINDOW_MS=60000\nRATE_LIMIT_MAX_REQUESTS=100\n```",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 20,
+      "charCount": 117
+    },
+    "embeddingsPreview": [
+      -0.01464080810546875,
+      -0.0167236328125,
+      0.038665771484375,
+      -0.04180908203125,
+      0.0191802978515625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-21",
+    "content": "# Rate limiting\nRATE_LIMIT_WINDOW_MS=60000\nRATE_LIMIT_MAX_REQUESTS=100\n```\n\n## Estructura del proyecto\n\n```\ntaskflow-api/\n├── src/\n│   ├── index.ts              # Entry point\n│   ├── app.ts           ...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Estructura del proyecto",
+      "position": 21,
+      "charCount": 1191
+    },
+    "embeddingsPreview": [
+      0.006877899169921875,
+      -0.016204833984375,
+      0.0322265625,
+      -0.0310516357421875,
+      0.0216827392578125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-22",
+    "content": "```\ntaskflow-api/\n├── src/\n│   ├── index.ts              # Entry point\n│   ├── app.ts                # Configuración de Express\n│   ├── routes/\n│   │   ├── auth.ts           # Rutas de autenticación\n│...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Correr en producción",
+      "position": 22,
+      "charCount": 1121
+    },
+    "embeddingsPreview": [
+      0.00978851318359375,
+      -0.0263519287109375,
+      0.037261962890625,
+      -0.02587890625,
+      0.01422119140625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-23",
+    "content": "```bash\n\n# Build TypeScript\nnpm run build",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 23,
+      "charCount": 41
+    },
+    "embeddingsPreview": [
+      -0.058074951171875,
+      -0.02264404296875,
+      -0.0027599334716796875,
+      -0.0253143310546875,
+      0.010650634765625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-24",
+    "content": "# Build TypeScript\nnpm run build\n\n# Correr migraciones en producción\nnpm run db:migrate:prod",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 24,
+      "charCount": 92
+    },
+    "embeddingsPreview": [
+      -0.0008530616760253906,
+      0.016754150390625,
+      0.043853759765625,
+      -0.0202484130859375,
+      -0.00914764404296875
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-25",
+    "content": "# Correr migraciones en producción\nnpm run db:migrate:prod\n\n# Iniciar servidor\nnpm start\n```\n\nSe recomienda usar PM2 o un process manager similar:\n\n```bash\nnpm install -g pm2\npm2 start dist/index.js -...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "(Introduccion)",
+      "position": 25,
+      "charCount": 243
+    },
+    "embeddingsPreview": [
+      0.04541015625,
+      0.01163482666015625,
+      0.0755615234375,
+      -0.01435089111328125,
+      -0.00005710124969482422
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-26",
+    "content": "```bash\nnpm install -g pm2\npm2 start dist/index.js --name taskflow-api\npm2 startup\npm2 save\n```\n\n## Scripts disponibles\n\n| Script | Descripción |\n|--------|-------------|\n| `npm run dev` | Inicia en m...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Scripts disponibles",
+      "position": 26,
+      "charCount": 693
+    },
+    "embeddingsPreview": [
+      0.020477294921875,
+      0.01445770263671875,
+      0.03900146484375,
+      -0.052093505859375,
+      -0.0042877197265625
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-27",
+    "content": "| Script | Descripción |\n|--------|-------------|\n| `npm run dev` | Inicia en modo desarrollo con hot-reload |\n| `npm run build` | Compila TypeScript a JavaScript |\n| `npm start` | Inicia el servidor ...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Contribución",
+      "position": 27,
+      "charCount": 862
+    },
+    "embeddingsPreview": [
+      0.01129913330078125,
+      0.0261993408203125,
+      0.02642822265625,
+      -0.01739501953125,
+      0.0011034011840820312
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-28",
+    "content": "Por favor lee [CONTRIBUTING.md](./CONTRIBUTING.md) antes de contribuir.\n\n## Soporte\n\n- **Documentación:** https://docs.taskflow.app\n- **Issues:** https://github.com/taskflow/api/issues\n- **Discord:** ...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Soporte",
+      "position": 28,
+      "charCount": 261
+    },
+    "embeddingsPreview": [
+      0.0175323486328125,
+      0.0117645263671875,
+      0.055084228515625,
+      -0.00803375244140625,
+      0.0146026611328125
+    ],
+    "embeddingsDimension": 1536
+  },
+  {
+    "id": "README.md-29",
+    "content": "- **Documentación:** https://docs.taskflow.app\n- **Issues:** https://github.com/taskflow/api/issues\n- **Discord:** https://discord.gg/taskflow\n- **Email:** support@taskflow.app\n\n## Licencia\n\nMIT — ver...",
+    "metadata": {
+      "source": "README.md",
+      "heading": "## Licencia",
+      "position": 29,
+      "charCount": 236
+    },
+    "embeddingsPreview": [
+      0.0031948089599609375,
+      0.06170654296875,
+      0.0004582405090332031,
+      -0.0162200927734375,
+      0.00897979736328125
+    ],
+    "embeddingsDimension": 1536
+  }
+]
